@@ -1,0 +1,18 @@
+version: "3.8"
+
+services:
+  frontend-app:
+    restart: always
+    build:
+      context: ./frontend-app
+      dockerfile: Dockerfile
+      args:
+        - API_SERVER=${ENV_API_SERVER}
+    volumes:
+      - django_static_volume:/usr/src/app/django_files/static
+      # - /Users/praju/Documents/gc-selfhelp:/ssl/
+    ports:
+      - 3000:3000
+
+volumes:
+  django_static_volume:

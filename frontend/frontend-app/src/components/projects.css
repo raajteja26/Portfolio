@@ -1,0 +1,10 @@
+.custom-close-button button.close {
+    color: rgb(253, 253, 253);
+  }
+.plusimage {
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 30px;
+  height: 30px;
+  filter: drop-shadow(2px 4px 6px black) ;
+}
