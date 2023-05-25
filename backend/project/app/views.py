@@ -5,7 +5,10 @@ from .models import Techincal_skills,Projects
 from rest_framework import viewsets
 from .serializers import ProjectsSerializer,SkillsSerializer
 from rest_framework.response import Response
+from django.contrib.auth import authenticate, login
+from django.middleware.csrf import get_token
 # Create your views here.
+
 
 class ProjectsViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Projects.objects.all()

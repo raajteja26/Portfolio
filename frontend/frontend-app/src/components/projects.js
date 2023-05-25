@@ -26,6 +26,7 @@ function Projects() {
       }
 
     ).catch(error => {
+      localStorage.removeItem('token');
       console.log(error)
     })
   }, [setProjects])
@@ -83,6 +84,7 @@ function Projects() {
           console.log(response)
         }
       ).catch(error => {
+        localStorage.removeItem('token');
         console.log(error)
       })
       window.location.reload()
@@ -199,7 +201,7 @@ function Projects() {
               </div>
             </div>
           ))}
-          <img className='plusimage hover-effect' src={plus} alt="plus" style={{ cursor: "pointer", width: "10%", height: "10%", float: "right", marginTop: "5%" }} onClick={() => setAddShow(true)} />
+          {localStorage.getItem('token') ? <img className='plusimage hover-effect' src={plus} alt="plus" style={{ cursor: "pointer", width: "10%", height: "10%", float: "right", marginTop: "5%" }} onClick={() => setAddShow(true)} /> : ""}
           <AddProjectModal
             show={addShow}
             onHide={() => setAddShow(false)}

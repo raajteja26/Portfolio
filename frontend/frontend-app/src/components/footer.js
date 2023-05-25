@@ -29,6 +29,9 @@ function Footer() {
           <div className='col-md-4 col-sm-12'>
             <div className='row' style={{ justifyContent: "center", marginInline: "7rem" }}>
               <h6>SOCIAL NETWORK</h6>
+              <div className='col'><img className='socialimages hover-effect' src={linkedin} alt="linkedin" style={{ cursor: "pointer" }} onClick={() => {
+                window.open(`https://www.linkedin.com/in/raaj-teja-513770208`);
+              }} /></div>
               <div className='col'><img className='socialimages hover-effect' src={instagram} alt="instagram" style={{ cursor: "pointer" }} onClick={() => {
                 window.open(`https://instagram.com/raajteja_26?igshid=OTk0YzhjMDVlZA==`);
               }} /></div>
@@ -38,9 +41,7 @@ function Footer() {
               <div className='col'><img className='socialimages hover-effect' src={twitter} alt="twitter" style={{ cursor: "pointer" }} onClick={() => {
                 window.open(`https://twitter.com/RaajtejaR?t=FzpDvNZmZggHU5qCU7EZUA&s=09`);
               }} /></div>
-              <div className='col'><img className='socialimages hover-effect' src={linkedin} alt="linkedin" style={{ cursor: "pointer" }} onClick={() => {
-                window.open(`https://www.linkedin.com/in/raaj-teja-513770208`);
-              }} /></div>
+              
             </div>
           </div>
         </div>

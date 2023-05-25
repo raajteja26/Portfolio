@@ -8,6 +8,7 @@ function App() {
   return (
     <BrowserRouter>
     <Navbar/>
+    <br/>
       <Routes>
         <Route exact path="/" element={<Main />} />
         <Route exact path="/projects" element={<Projects />} />

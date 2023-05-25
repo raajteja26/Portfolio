@@ -27,43 +27,42 @@ function Main() {
       </div>
       <br/>
       <div className='container' style={{alignItems:"center"}}>
-       <div className='row'>
-        <div className='col'>
+       <div  className="row justify-content-center align-items-center">
+        <div className='col d-flex justify-content-center flex-column align-items-center'>
         <img className='skillsimages' src={react} alt="react"/>
-          <h5>React</h5>
+          <h5 >React</h5>
         </div>
-        <div className='col'>
+        <div className='col d-flex justify-content-center flex-column align-items-center'>
         <img className='skillsimages' src={django} alt="django"/>
-          <h5>Django</h5>
+          <h5 >Django</h5>
         </div>
-        <div className='col'>
+        <div className='col d-flex justify-content-center flex-column align-items-center'>
         <img className='skillsimages' src={python} alt="python"/>
-          <h5>Python</h5>
+          <h5 >Python</h5>
         </div>
-        <div className='col'>
+        <div className='col d-flex justify-content-center flex-column align-items-center'>
         <img className='skillsimages' src={docker} alt="docker"/>
-          <h5>Docker</h5>
+          <h5 >Docker</h5>
         </div>
-        <div className='col'>
+        <div className='col d-flex justify-content-center flex-column align-items-center'>
         <img className='skillsimages' src={html} alt="html"/>
-          <h5>HTML</h5>
+          <h5 >HTML</h5>
         </div>
-        <div className='col'>
+        <div className='col d-flex justify-content-center flex-column align-items-center'>
           <img className='skillsimages' src={css} alt="css"/>
-          <h5>CSS</h5>
+          <h5 >CSS</h5>
         </div>
-        <div className='col'>
+        <div className='col d-flex justify-content-center flex-column align-items-center'>
           <img className='skillsimages' src={git} alt="git"/>
-          <h5>Git</h5>
+          <h5 >Git</h5>
         </div>
-        <div className='col'>
+        <div className='col d-flex justify-content-center flex-column align-items-center'>
           <img className='skillsimages' src={postgress} alt="postgress"/>
           <h5>PostgreSQL</h5>
         </div>
        </div>
       </div>
       <br/>
-      {/* <div className='cardanimated'></div> */}
       <br/>
       <div className='bottom-component'>
         <Footer/>

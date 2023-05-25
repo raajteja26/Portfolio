@@ -2,23 +2,28 @@ import React from 'react'
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import 'bootstrap/dist/css/bootstrap.css';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import LoginPage from './login';
 
 function navbar() {
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    window.location.reload()
+  };
   return (
     <>
       <Navbar bg="light">
-        <Container>
-          <Navbar.Brand style={{fontWeight:"600px"}} href="/">Raajteja.</Navbar.Brand>
-          <Navbar.Brand style={{fontWeight:"600px"}} href="/projects">Projects</Navbar.Brand>
+        <Container fluid>
+        <Row>
+        <Col><Navbar.Brand style={{fontWeight:"600px"}} href="/">Raajteja.</Navbar.Brand></Col>
+        <Col ><Navbar.Brand style={{fontWeight:"600px"}} href="/projects">Projects</Navbar.Brand></Col>
+        </Row>
+        <Navbar.Brand style={{fontWeight:"600px"}}>{localStorage.getItem('token') ? <h6 style={{cursor:"pointer"}} onClick={handleLogout}>Logout</h6> : <LoginPage placement='end' name='Login'/>}</Navbar.Brand>
+        
         </Container>
       </Navbar>
     </>
-    // <div>
-    // <nav className="navbar sticky-top navbar-light bg-light">
-    //     <a style={{fontWeight:"bold"}} href="#"><Link to="/">Raajteja.</Link></a>
-    //     <a><Link to="/projects">Projects</Link></a>
-    //  </nav>
-    // </div>
   )
 }
 
