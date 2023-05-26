@@ -4,7 +4,19 @@
 /node_modules
 /.pnp
 .pnp.js
+# Ignore Django pycache files
+__pycache__/
 
+# Ignore compiled Python files
+*.pyc
+*.pyo
+*.pyd
+*.pyw
+*.pyz
+*.pyzw
+
+# Ignore Django specific compiled files
+*.cpython-310.pyc
 # testing
 /coverage
 

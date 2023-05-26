@@ -19,3 +19,10 @@ class Projects(models.Model):
 
     # def __str__(self):
     #     return f"{self.name}"
+class Feedback(models.Model):
+    name = models.CharField(max_length=255)
+    text = models.TextField()
+    image = models.ImageField(upload_to='images/')
+
+    # def __str__(self):
+    #     return self.name

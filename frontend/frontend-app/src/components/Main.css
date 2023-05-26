@@ -14,6 +14,16 @@
   height: 70px;
   filter: drop-shadow(2px 4px 6px black) ;
 }
+.feedbackimages {
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 100px;
+  height: 150px;
+  filter: drop-shadow(2px 4px 6px black) ;
+}
+.feedbacktext {
+  filter: drop-shadow(1px 2px 5px black) ;
+}
 h5 {
   margin-top: 8px;
 }
@@ -23,4 +33,26 @@ h5 {
 }
 .bottom-component {
   bottom: 0;
+}
+.feedbackcarouselold{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  width: 100%;
+  background-color:#1d262d;
+  color: #fff;
+  margin: 0 15px;
+  font-size: 4em;
+}
+.feedbackcarousel{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  width: 1000%;
+  background-color:#1d262d;
+  color: #fff;
+  margin: 0 15px;
+  font-size: 1em;
 }

@@ -11,7 +11,7 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Swal from "sweetalert2";
 import Row from 'react-bootstrap/Row';
-import 'bootstrap/dist/css/bootstrap.css';
+import "../css/bootstrap.min.css";
 function Projects() {
   const [modalShow, setModalShow] = React.useState(false);
   const [addShow, setAddShow] = React.useState(false);

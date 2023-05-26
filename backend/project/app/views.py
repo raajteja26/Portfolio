@@ -1,9 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from rest_framework.decorators import action
-from .models import Techincal_skills,Projects
+from .models import Techincal_skills,Projects,Feedback
 from rest_framework import viewsets
-from .serializers import ProjectsSerializer,SkillsSerializer
+from .serializers import ProjectsSerializer,SkillsSerializer,FeedbackSerializer
 from rest_framework.response import Response
 from django.contrib.auth import authenticate, login
 from django.middleware.csrf import get_token
@@ -46,3 +46,14 @@ class ProjectsViewSet(viewsets.ReadOnlyModelViewSet):
             # Error handling
             print(f"An error occurred while adding data: {str(e)}")
         return Response(response)
+
+class FeedbackViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = Feedback.objects.all()
+    serializer_class = FeedbackSerializer
+    def get_serializer(self, *args, **kwargs):
+        if isinstance(kwargs.get("data", {}), list):
+            kwargs["many"] = True
+        return super(FeedbackViewSet, self).get_serializer(*args, **kwargs)
+
+    def get_queryset(self):
+        return Feedback.objects.all()
