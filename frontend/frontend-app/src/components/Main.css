@@ -34,25 +34,23 @@ h5 {
 .bottom-component {
   bottom: 0;
 }
-.feedbackcarouselold{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 200px;
-  width: 100%;
-  background-color:#1d262d;
-  color: #fff;
-  margin: 0 15px;
-  font-size: 4em;
-}
 .feedbackcarousel{
   display: flex;
   justify-content: center;
   align-items: center;
   height: 200px;
   width: 1000%;
-  background-color:#1d262d;
+  background-color:#2b2928;
   color: #fff;
   margin: 0 15px;
   font-size: 1em;
+}
+.rec-arrow.rec-arrow-left {
+  background : none;
+  color: white;
+}
+
+.rec-arrow.rec-arrow-right {
+  background : none;
+  color: white;
 }

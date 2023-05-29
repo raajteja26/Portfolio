@@ -1,5 +1,5 @@
 from django.contrib import admin
-from app.models import Techincal_skills,Projects,Feedback
+from app.models import Techincal_skills,Projects,Feedback,Certificates
 # Register your models here.
 
 class Skills_admin(admin.ModelAdmin):
@@ -8,6 +8,9 @@ class Projects_admin(admin.ModelAdmin):
     list_display = ["name", "role"]
 class Feedback_admin(admin.ModelAdmin):
     list_display = ["name"]
+class Certificates_admin(admin.ModelAdmin):
+    list_display = ["name"]
 admin.site.register(Techincal_skills,Skills_admin)
 admin.site.register(Projects,Projects_admin)
 admin.site.register(Feedback,Feedback_admin)
+admin.site.register(Certificates,Certificates_admin)

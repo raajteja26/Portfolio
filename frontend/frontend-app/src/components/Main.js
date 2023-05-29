@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useRef } from 'react';
 import "./Main.css"
 import css from "./images/css.png";
 import django from "./images/django.jpeg";
@@ -14,31 +14,35 @@ import "../css/bootstrap.min.css";
 import Carousel from "react-elastic-carousel";
 import axios from 'axios';
 import Modal from 'react-bootstrap/Modal';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import plus from "./images/plus.png";
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
-import Swal from "sweetalert2";
 import Row from 'react-bootstrap/Row';
 
 function Main() {
-  const [index, setIndex] = useState(0);
   const [feedbacks, setFeedbacks] = React.useState([])
   const [addShow, setAddShow] = React.useState(false);
-  React.useEffect(() => {
-    axios.get('feedback').then(
-      response => {
-        setFeedbacks(response.data)
-        console.log(response.data)
-      }
+  const carouselRef = useRef(null);
 
-    ).catch(error => {
-      localStorage.removeItem('token');
-      console.log(error)
-    })
-  }, [setFeedbacks])
+  const handleChangeIndex = (index) => {
+    carouselRef.current.goTo(index);
+  };
+  React.useEffect(() => {
+    fetchFeedbacks();
+  }, [setFeedbacks]); 
+
+    const fetchFeedbacks = async () => {
+      try {
+        const response = await axios.get('feedback');
+        setFeedbacks(response.data);
+        console.log(response.data);
+      } catch (error) {
+        localStorage.removeItem('token');
+        console.log(error);
+      }
+    };
+
   const breakPoints = [
     { width: 1, itemsToShow: 2 },
     { width: 550, itemsToShow: 3 },
@@ -47,12 +51,18 @@ function Main() {
   ];
   
   function AddProjectModal(props) {
+    const [selectedFile, setSelectedFile] = useState(null);
     const [formData, setFormData] = React.useState({
       name: "",
-      feedback: "",
-      // technologies: "",
-      // responsibilities: ""
+      text: "",
     })
+
+    const handleFileChange = (event) => {
+      const file = event.target.files[0];
+      setSelectedFile(file);
+      setFormData({ ...formData }); 
+    }
+
     const handleSubmit = (event) => {
       event.preventDefault();
       const form = event.currentTarget;
@@ -60,25 +70,34 @@ function Main() {
         event.preventDefault();
         event.stopPropagation();
       }
+      const data = new FormData();
+      data.append("name", formData.name);
+      data.append("text", formData.text);
+      if (selectedFile) {
+        data.append("image", selectedFile);
+      }
       setAddShow(false)
-      axios.post('feedback/', formData, {
+      axios.post('feedback/addfeedback/', data, {
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "multipart/form-data",
         }
       }).then(
         response => {
           console.log(response)
+          fetchFeedbacks();
         }
       ).catch(error => {
         localStorage.removeItem('token');
         console.log(error)
       })
-      window.location.reload()
+      handleChangeIndex(feedbacks.length)
     }
+
     const handleInputChange = (event) => {
       const { name, value } = event.target;
       setFormData({ ...formData, [name]: value });
     };
+
     return (
       <Modal
         {...props}
@@ -115,17 +134,34 @@ function Main() {
                 <Form.Control
                   required
                   type="text"
-                  name="role"
-                  autoComplete="feedback"
+                  name="text"
+                  autoComplete="text"
                   onChange={handleInputChange}
-                  placeholder="feedback"
-                  value={formData.feedback}
+                  placeholder="text"
+                  value={formData.text}
+                />
+                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+              </Form.Group>
+
+              <Form.Group as={Col} md="12" controlId="validationCustom02">
+                <Form.Label>Upload Image</Form.Label>
+                <Form.Control
+                  required
+                  type="file"
+                  name="image"
+                  autoComplete="image"
+                  onChange={handleFileChange}
+                  placeholder="image"
                 />
                 <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
               </Form.Group>
             </Row>
-            <Button type="submit" style={{ float: "right" }}>
+            
+            <Button type="submit" style={{ float: "right",marginLeft:"5px"}}>
               Submit
+            </Button>
+            <Button type="button" onClick={() => setAddShow(false)} style={{ float: "right" }}>
+              Cancel
             </Button>
           </Form>
         </Modal.Body>
@@ -138,7 +174,7 @@ function Main() {
       <div className='container pickupline'>
         <div className='row' style={{ alignItems: "center" }}>
           <div className='col-md-7'>
-            <p style={{ color: "white", fontSize: "20px" }}>As a skilled developer, I have extensive knowledge and experience in both React and Django Python, enabling me to design and implement robust web applications that are both visually stunning and highly functional. With a proven track record of delivering quality solutions, I am confident in my ability to tackle any project with professionalism and expertise.</p>
+            <p style={{ color: "white", fontSize: "20px" }}>Experienced Full Stack Engineer proficient in React and Django, with expertise in Docker and Kubernetes. Skilled in frontend and backend development, RESTful API design, and version control. Strong problem-solving abilities and a focus on delivering high-quality software solutions.</p>
           </div>
           <div className='col-md-5'>
             <img className='raajteja1' src={raajteja1} alt="raajteja1" />
@@ -190,38 +226,18 @@ function Main() {
             show={addShow}
             onHide={() => setAddShow(false)}
           />
-      <Carousel breakPoints={breakPoints}>
+      <Carousel ref={carouselRef} breakPoints={breakPoints}>
       {
         feedbacks.map((feedback, id) => {
           return (
             <>
-            {/* <div style={{ position: 'relative', width: '100%' }}>
-      <img
-        src="your-image-url.jpg"
-        alt="Your Image"
-        style={{ width: '100%', height: 'auto' }}
-      />
-      <div
-        style={{
-          position: 'absolute',
-          bottom: 0,
-          left: 0,
-          width: '100%',
-          background: 'rgba(0, 0, 0, 0.5)',
-          color: '#fff',
-          padding: '10px',
-        }}
-      >
-        Your Text
-      </div>
-    </div> */}
             <div className='feedbackcarousel'>
             <img
               key={id}
               className='feedbackcarousel feedbackimages'
               src={feedback.image}
               style={{position:"relative",marginRight:"-5px",marginLeft:"-5px",borderRadius:"10px"}}
-              alt="react"
+              alt="feed"
             />
             <h5 className='feedbacktext' style={{position:"absolute",color:"white",bottom:"0px",fontWeight:"500"}}>{feedback.name}</h5>
             </div>

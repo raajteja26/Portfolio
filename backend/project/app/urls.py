@@ -1,12 +1,13 @@
 from django.urls import path,include
 from . import views
 from rest_framework import routers
-from .views import ProjectsViewSet,FeedbackViewSet
+from .views import ProjectsViewSet,FeedbackViewSet,CertificatesViewSet
 from rest_framework_simplejwt import views as jwt_views
 
 router = routers.DefaultRouter()
 router.register(r'projects', ProjectsViewSet,'projects')
 router.register(r'feedback', FeedbackViewSet,'feedback')
+router.register(r'certificates', CertificatesViewSet,'certificates')
 urlpatterns = [
     path('', include(router.urls)),
     path('token/', jwt_views.TokenObtainPairView.as_view(), name='token_access'),
