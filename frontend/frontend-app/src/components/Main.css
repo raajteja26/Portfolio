@@ -12,17 +12,20 @@
   background-size: contain;
   width: 70px;
   height: 70px;
-  filter: drop-shadow(2px 4px 6px black) ;
+  filter: drop-shadow(2px 4px 6px #0d0e0e) ;
 }
 .feedbackimages {
   background-repeat: no-repeat;
   background-size: contain;
   width: 100px;
   height: 150px;
-  filter: drop-shadow(2px 4px 6px black) ;
+  filter: drop-shadow(2px 4px 6px #0d0e0e) ;
+}
+.exptext {
+  filter: drop-shadow(1px 2px 0px #591216) ;
 }
 .feedbacktext {
-  filter: drop-shadow(1px 2px 5px black) ;
+  filter: drop-shadow(1px 2px 5px rgb(0, 0, 0)) ;
 }
 h5 {
   margin-top: 8px;
@@ -44,6 +47,12 @@ h5 {
   color: #fff;
   margin: 0 15px;
   font-size: 1em;
+}
+small {
+ position: absolute;
+ bottom: 5px;
+ color: white;
+
 }
 .rec-arrow.rec-arrow-left {
   background : none;

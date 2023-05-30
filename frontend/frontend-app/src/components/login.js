@@ -36,7 +36,6 @@ function LoginPage({ name, ...props }) {
         }).catch((err) => {
            console.log(err)
         })
-        console.log(localStorage.getItem("token"),"lllll")
     {localStorage.getItem("token") ? setLoginButton("Login") : setLoginButton("Try Again...")}
     {localStorage.getItem("token") ? setRedText(false) : setRedText(true)}
     {localStorage.getItem("token") ? setColour("black") : setColour("red")}

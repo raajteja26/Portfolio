@@ -16,17 +16,32 @@ import axios from 'axios';
 import Modal from 'react-bootstrap/Modal';
 import plus from "./images/plus.png";
 import Button from 'react-bootstrap/Button';
+import Tooltip from 'react-bootstrap/Tooltip';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 
 function Main() {
   const [feedbacks, setFeedbacks] = React.useState([])
+  const [experience, setExperience] = React.useState(0)
   const [addShow, setAddShow] = React.useState(false);
   const carouselRef = useRef(null);
 
   const handleChangeIndex = (index) => {
     carouselRef.current.goTo(index);
+  };
+  React.useEffect(() => {
+    fetchExperience();
+  }, [setExperience]); 
+  const fetchExperience = async () => {
+    try {
+      const response = await axios.get('experience');
+      setExperience(response.data[0].years);
+    } catch (error) {
+      localStorage.removeItem('token');
+      console.log(error);
+    }
   };
   React.useEffect(() => {
     fetchFeedbacks();
@@ -47,7 +62,7 @@ function Main() {
     { width: 1, itemsToShow: 2 },
     { width: 550, itemsToShow: 3 },
     { width: 768, itemsToShow: 4 },
-    { width: 1200, itemsToShow: 5 },
+    { width: 1200, itemsToShow: 6 },
   ];
   
   function AddProjectModal(props) {
@@ -172,12 +187,13 @@ function Main() {
   return (
     <div>
       <div className='container pickupline'>
-        <div className='row' style={{ alignItems: "center" }}>
+        <div className='row ' style={{ alignItems: "center" }}>
           <div className='col-md-7'>
             <p style={{ color: "white", fontSize: "20px" }}>Experienced Full Stack Engineer proficient in React and Django, with expertise in Docker and Kubernetes. Skilled in frontend and backend development, RESTful API design, and version control. Strong problem-solving abilities and a focus on delivering high-quality software solutions.</p>
           </div>
-          <div className='col-md-5 raajphoto'>
+          <div className='col-md-5 raajphoto position-relative'>
             <img className='raajteja1' src={raajteja1} alt="raajteja1" />
+            <div class="position-absolute top-0 end-0"><h3 className="exptext" style={{color:"white",borderRadius:"5px",marginTop:"5px",marginRight:"12px",fontWeight:"900"}}>{experience}+ years</h3></div>
           </div>
         </div>
       </div>
@@ -231,16 +247,22 @@ function Main() {
         feedbacks.map((feedback, id) => {
           return (
             <>
-            <div className='feedbackcarousel'>
+            <OverlayTrigger
+            placement="bottom"
+            overlay={<Tooltip id="button-tooltip-2 feedbacktext"><h6 >{feedback.text}</h6></Tooltip>}
+          >
+            <div className='feedbackcarousel textfeedback'>
+  
             <img
               key={id}
               className='feedbackcarousel feedbackimages'
               src={feedback.image}
-              style={{position:"relative",marginRight:"-5px",marginLeft:"-5px",borderRadius:"10px"}}
+              style={{position:"relative",marginRight:"-5px",marginLeft:"-5px",borderRadius:"20px"}}
               alt="feed"
             />
-            <h5 className='feedbacktext' style={{position:"absolute",color:"white",bottom:"0px",fontWeight:"500"}}>{feedback.name}</h5>
+            <h5 key={id} className='feedbacktext' style={{position:"absolute",color:"white",bottom:"0px",fontWeight:"700"}}>{feedback.name}</h5>
             </div>
+            </OverlayTrigger>
             </>
           );
         })

@@ -17,9 +17,9 @@ function Footer() {
           <div className='col-md-6 col-sm-12'>
             <div className='row'>
               <div className='col-12'><h6 style={{ float: "left",marginBottom:"15px" }}>CONTACT ME -</h6></div>
-              <div className='col-12'><FontAwesomeIcon style={{ float: "left", marginTop: "3px" }} icon={faLocationDot} /><p style={{ float: "left" }}> Venkateshwarlapally, Kamalapur, Warangal, 506391</p></div>
-              <div className='col-12'><FontAwesomeIcon style={{ float: "left", marginTop: "3px" }} icon={faPhone} /><p style={{ float: "left" }}> 9515371838</p></div>
-              <div className='col-12'><FontAwesomeIcon style={{ float: "left", marginTop: "3px" }} icon={faEnvelope} /><p style={{ float: "left" }}> rajupaka0811@gmail.com</p></div>
+              <div className='col-12'><FontAwesomeIcon style={{ float: "left", marginTop: "3px" }} icon={faLocationDot} /><p style={{ float: "left" }}><span style={{marginLeft:"5px"}}> Venkateshwarlapally, Kamalapur, Warangal, 506391</span></p></div>
+              <div className='col-12'><FontAwesomeIcon style={{ float: "left", marginTop: "3px" }} icon={faPhone} /><p style={{ float: "left" }}><span style={{marginLeft:"5px"}}>9515371838</span></p></div>
+              <div className='col-12'><FontAwesomeIcon style={{ float: "left", marginTop: "3px" }} icon={faEnvelope} /><p style={{ float: "left" }}><span style={{marginLeft:"5px"}}>rajupaka0811@gmail.com</span></p></div>
             </div>
           </div>
           <div className='col-md-6 col-sm-12'>

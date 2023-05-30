@@ -18,6 +18,7 @@ function navbar() {
         <Row>
         <Col><Navbar.Brand style={{fontWeight:"600px"}} href="/">Raajteja.</Navbar.Brand></Col>
         <Col ><Navbar.Brand style={{fontWeight:"600px"}} href="/projects">Projects</Navbar.Brand></Col>
+        {localStorage.getItem("token") ? <Col ><Navbar.Brand style={{fontWeight:"600px"}} href="/admin">Admin</Navbar.Brand></Col> : ""}
         </Row>
         <Navbar.Brand style={{fontWeight:"600px"}}>{localStorage.getItem('token') ? <h6 style={{cursor:"pointer"}} onClick={handleLogout}>Logout</h6> : <LoginPage placement='end' name='Login'/>}</Navbar.Brand>
         
