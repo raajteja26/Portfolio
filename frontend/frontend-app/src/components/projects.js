@@ -1,4 +1,4 @@
-import React, { useState,useRef } from 'react';
+import React, { useState } from 'react';
 import axios from "axios";
 import Footer from './footer';
 import "./projects.css";
@@ -9,7 +9,6 @@ import plus from "./images/plus.png";
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
-import Swal from "sweetalert2";
 import Row from 'react-bootstrap/Row';
 import "../css/bootstrap.min.css";
 import Carousel from "react-elastic-carousel";
@@ -17,6 +16,7 @@ import Carousel from "react-elastic-carousel";
 function Projects() {
   const [modalShow, setModalShow] = React.useState(false);
   const [addShow, setAddShow] = React.useState(false);
+  const [addShow1, setAddShow1] = React.useState(false);
   const [projects, setProjects] = React.useState([])
   const [certificates, setCertificates] = React.useState([])
   const [projectName, setProjectName] = React.useState("")
@@ -25,19 +25,11 @@ function Projects() {
 
   const breakPoints = [
     { width: 1, itemsToShow: 1 },
-    { width: 550, itemsToShow: 2 },
-    { width: 768, itemsToShow: 2 },
+    { width: 550, itemsToShow: 1 },
+    { width: 768, itemsToShow: 1 },
     { width: 1200, itemsToShow: 2 },
   ];
 
-  const carouselData = [
-    { id: 1, title: 'Slide 1' },
-    { id: 2, title: 'Slide 2' },
-    { id: 3, title: 'Slide 3' },
-    // Add more carousel items as needed
-  ];
-
-  const lastItemIndex = carouselData.length - 1;
   React.useEffect(() => {
     axios.get('projects').then(
       response => {
@@ -85,7 +77,6 @@ function Projects() {
   React.useEffect(() => {
     fetchCertificates();
   }, [setCertificates]); 
-    // Define a separate function to fetch feedback data
     const fetchCertificates = async () => {
       try {
         const response = await axios.get('certificates');
@@ -216,7 +207,7 @@ function Projects() {
       </Modal>
     );
   }
-  function AddProjectModal(props) {
+  function AddCertModal(props) {
     const [selectedFile, setSelectedFile] = useState(null);
     const [formData, setFormData] = React.useState({
       name: "",
@@ -311,7 +302,7 @@ function Projects() {
             <Button type="submit" style={{ float: "right",marginLeft:"5px"}}>
               Submit
             </Button>
-            <Button type="button" onClick={() => setAddShow(false)} style={{ float: "right" }}>
+            <Button type="button" onClick={() => setAddShow1(false)} style={{ float: "right" }}>
               Cancel
             </Button>
           </Form>
@@ -326,7 +317,7 @@ function Projects() {
         <h2 style={{ fontWeight: "600" }}>Projects</h2>
         <div className="row">
           {projects.map((project, id) => (
-            <div className="col-sm-4" key={id}>
+            <div className="col-sm-12" key={id}>
               <div className="card" style={{ marginTop: "5%" }}>
                 <div className="card-body" style={{ backgroundColor: "#1d262d", color: "white", borderRadius: "5px" }}>
                   <h6 className="card-title" style={{ fontWeight: "600", float: "right" }}>{project.name}</h6>
@@ -355,10 +346,10 @@ function Projects() {
       <br />
       <div className='container-fluid' style={{backgroundColor:"#1d262d",marginTop:"10px",marginBottom:"10px"}}>
         <h4 style={{color:"white"}}>Certificates</h4>
-        {localStorage.getItem('token') ? <img className='plusimage hover-effect' src={plus} alt="plus" style={{ cursor: "pointer", width: "4%", height: "4%", float: "right", marginTop: "-30px",backgroundColor:"white",borderRadius:"10px" }} onClick={() => setAddShow(true)} /> : ""}
-        <AddProjectModal
-            show={addShow}
-            onHide={() => setAddShow(false)}
+        {localStorage.getItem('token') ? <img className='plusimage hover-effect' src={plus} alt="plus" style={{ cursor: "pointer", width: "4%", height: "4%", float: "right", marginTop: "-30px",backgroundColor:"white",borderRadius:"10px" }} onClick={() => setAddShow1(true)} /> : ""}
+        <AddCertModal
+            show={addShow1}
+            onHide={() => setAddShow1(false)}
           />
       <Carousel breakPoints={breakPoints}>
       {

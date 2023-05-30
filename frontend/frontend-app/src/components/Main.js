@@ -176,7 +176,7 @@ function Main() {
           <div className='col-md-7'>
             <p style={{ color: "white", fontSize: "20px" }}>Experienced Full Stack Engineer proficient in React and Django, with expertise in Docker and Kubernetes. Skilled in frontend and backend development, RESTful API design, and version control. Strong problem-solving abilities and a focus on delivering high-quality software solutions.</p>
           </div>
-          <div className='col-md-5'>
+          <div className='col-md-5 raajphoto'>
             <img className='raajteja1' src={raajteja1} alt="raajteja1" />
           </div>
         </div>

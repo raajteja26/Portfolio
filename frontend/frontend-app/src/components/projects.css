@@ -8,3 +8,8 @@
   height: 30px;
   filter: drop-shadow(2px 4px 6px black) ;
 }
+@media (max-width: 767px) {
+  .social{
+    display: none;
+  }
+}

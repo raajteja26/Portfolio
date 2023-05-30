@@ -13,34 +13,38 @@ function Footer() {
       <div className='container-fluid' style={{ backgroundColor: "#1d262d", color: "white" }}>
         <br />
         <div className='row'>
-          <div className='col-md-4 col-sm-12'>
-            <div className='row' style={{float:"left"}}>
-              <h6>ABOUT ME</h6>
-            </div>
-          </div>
-          <div className='col-md-4 col-sm-12'>
+
+          <div className='col-md-6 col-sm-12'>
             <div className='row'>
-              <div className='col-12'><h6 style={{ float: "left" }}>CONTACT ME</h6></div>
+              <div className='col-12'><h6 style={{ float: "left",marginBottom:"15px" }}>CONTACT ME -</h6></div>
               <div className='col-12'><FontAwesomeIcon style={{ float: "left", marginTop: "3px" }} icon={faLocationDot} /><p style={{ float: "left" }}> Venkateshwarlapally, Kamalapur, Warangal, 506391</p></div>
               <div className='col-12'><FontAwesomeIcon style={{ float: "left", marginTop: "3px" }} icon={faPhone} /><p style={{ float: "left" }}> 9515371838</p></div>
               <div className='col-12'><FontAwesomeIcon style={{ float: "left", marginTop: "3px" }} icon={faEnvelope} /><p style={{ float: "left" }}> rajupaka0811@gmail.com</p></div>
             </div>
           </div>
-          <div className='col-md-4 col-sm-12'>
+          <div className='col-md-6 col-sm-12'>
             <div className='row' style={{ justifyContent: "center", marginInline: "7rem" }}>
-              <h6>SOCIAL NETWORK</h6>
-              <div className='col'><img className='socialimages hover-effect' src={linkedin} alt="linkedin" style={{ cursor: "pointer" }} onClick={() => {
+              <h6 className="social" style={{marginBottom:"15px"}}>SOCIAL NETWORKS -</h6>
+              <div className='col'>
+              <img className='socialimages hover-effect' src={linkedin} alt="linkedin" style={{ cursor: "pointer" }} onClick={() => {
                 window.open(`https://www.linkedin.com/in/raaj-teja-513770208`);
-              }} /></div>
-              <div className='col'><img className='socialimages hover-effect' src={instagram} alt="instagram" style={{ cursor: "pointer" }} onClick={() => {
+              }} />
+              </div>
+              <div className='col'>
+              <img className='socialimages hover-effect' src={instagram} alt="instagram" style={{ cursor: "pointer" }} onClick={() => {
                 window.open(`https://instagram.com/raajteja_26?igshid=OTk0YzhjMDVlZA==`);
-              }} /></div>
-              <div className='col'><img className='socialimages hover-effect' src={facebook} alt="facebook" style={{ cursor: "pointer" }} onClick={() => {
+              }} />
+              </div>
+              <div className='col'>
+              <img className='socialimages hover-effect' src={facebook} alt="facebook" style={{ cursor: "pointer" }} onClick={() => {
                 window.open(`https://www.facebook.com/profile.php?id=100007375189321&mibextid=ZbWKwL`);
-              }} /></div>
-              <div className='col'><img className='socialimages hover-effect' src={twitter} alt="twitter" style={{ cursor: "pointer" }} onClick={() => {
+              }} />
+              </div>
+              <div className='col'>
+              <img className='socialimages hover-effect' src={twitter} alt="twitter" style={{ cursor: "pointer" }} onClick={() => {
                 window.open(`https://twitter.com/RaajtejaR?t=FzpDvNZmZggHU5qCU7EZUA&s=09`);
-              }} /></div>
+              }} />
+              </div>
               
             </div>
           </div>
