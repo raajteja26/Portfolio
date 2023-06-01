@@ -1,7 +1,6 @@
 import React from 'react'
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
-import 'bootstrap/dist/css/bootstrap.css';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import LoginPage from './login';

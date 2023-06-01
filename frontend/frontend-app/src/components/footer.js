@@ -6,7 +6,6 @@ import facebook from "./images/facebook.png";
 import linkedin from "./images/linkedin.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faLocationDot, faPhone, faEnvelope} from "@fortawesome/free-solid-svg-icons";
-import 'bootstrap/dist/css/bootstrap.css';
 
 function Footer() {
     return (

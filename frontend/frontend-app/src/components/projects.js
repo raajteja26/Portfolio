@@ -10,7 +10,6 @@ import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
-import "../css/bootstrap.min.css";
 import Carousel from "react-elastic-carousel";
 
 function Projects() {
@@ -59,7 +58,7 @@ function Projects() {
       >
         <Modal.Header style={{ backgroundColor: "#1d262d", color: "white" }} className="custom-close-button" closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
-            Roles and Responsibilities in {projectName} Project:
+            Roles and Responsibilities in - {projectName} Project:
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -312,21 +311,24 @@ function Projects() {
   }
   return (
     <div>
-      <div className='container' >
+      <div className='container-fluid' style={{position:"relative"}}>
         <br/>
         <h2 style={{ fontWeight: "600" }}>Projects</h2>
+        <div style={{position:"absolute",top:"0px",right:"20px"}}>
+          {localStorage.getItem('token') ? <img className='plusimage hover-effect' src={plus} alt="plus" style={{cursor: "pointer", width: "10%", height: "10%", float: "right", marginTop: "5%" }} onClick={() => setAddShow(true)} /> : ""}
+          </div>
         <div className="row">
           {projects.map((project, id) => (
             <div className="col-sm-12" key={id}>
-              <div className="card" style={{ marginTop: "5%" }}>
+              <div className="card" style={{ marginTop: "2%"}}>
                 <div className="card-body" style={{ backgroundColor: "#1d262d", color: "white", borderRadius: "5px" }}>
-                  <h6 className="card-title" style={{ fontWeight: "600", float: "right" }}>{project.name}</h6>
-                  <p className="card-title" style={{ fontWeight: "600" }}>{project.role}</p>
-                  <div className='container' style={{ borderRadius: "5px", backgroundColor: "white", color: "#1d262d" }}>
-                    <p className="card-title" style={{ fontWeight: "500" }}>Technologies:</p>
-                    <p className="card-text">{project.technologies}</p>
+                  <h6 className="card-title" style={{ fontWeight: "600", float: "right" }}>Project - <span className='roletext'>{project.name}</span></h6>
+                  <p className="card-title" style={{ fontWeight: "600" }}>Role - <span className='roletext'>{project.role}</span></p>
+                  <div className='container-fluid' style={{ borderRadius: "5px", backgroundColor: "white", color: "#1d262d" }}>
+                    <p className="card-title" style={{ fontWeight: "700" }}>Technologies:</p>
+                    <p className="card-text" style={{fontWeight:"600"}}>{project.technologies}</p>
                   </div>
-                  <p style={{ float: "right", cursor: "pointer" }} onClick={() => onClickMore(project.responsibilities, project.name)}>More...</p>
+                  <p style={{ float: "right", cursor: "pointer"}} onClick={() => onClickMore(project.responsibilities, project.name)}><button class="btn btn-outline-primary" style={{fontWeight:"400", borderRadius:"5px",marginTop:"4px"}}><FontAwesomeIcon icon={faArrowRight} /> click to see Responsibilities...</button></p>
                   <ResponsibilitiesModal
                     show={modalShow}
                     onHide={() => setModalShow(false)}
@@ -335,7 +337,6 @@ function Projects() {
               </div>
             </div>
           ))}
-          {localStorage.getItem('token') ? <img className='plusimage hover-effect' src={plus} alt="plus" style={{ cursor: "pointer", width: "10%", height: "10%", float: "right", marginTop: "5%" }} onClick={() => setAddShow(true)} /> : ""}
           <AddProjectModal
             show={addShow}
             onHide={() => setAddShow(false)}

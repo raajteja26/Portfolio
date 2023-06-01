@@ -7,6 +7,8 @@ import html from "./images/html.png";
 import python from "./images/python.png";
 import react from "./images/react.png";
 import git from "./images/git.png";
+import girl from "./images/girl.jpg";
+import man from "./images/man.png";
 import postgress from "./images/postgress.png";
 import raajteja1 from "./images/raajteja1.jpg";
 import Footer from './footer';
@@ -21,16 +23,15 @@ import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
 function Main() {
   const [feedbacks, setFeedbacks] = React.useState([])
   const [experience, setExperience] = React.useState(0)
   const [addShow, setAddShow] = React.useState(false);
-  const carouselRef = useRef(null);
 
-  const handleChangeIndex = (index) => {
-    carouselRef.current.goTo(index);
-  };
+
   React.useEffect(() => {
     fetchExperience();
   }, [setExperience]); 
@@ -50,8 +51,8 @@ function Main() {
     const fetchFeedbacks = async () => {
       try {
         const response = await axios.get('feedback');
-        setFeedbacks(response.data);
-        console.log(response.data);
+        const reversedData = response.data.reverse();
+        setFeedbacks(reversedData);
       } catch (error) {
         localStorage.removeItem('token');
         console.log(error);
@@ -71,13 +72,15 @@ function Main() {
       name: "",
       text: "",
     })
+    const [checked,setChecked] = React.useState(false)
+    const [gender, setGender] = useState("");
 
     const handleFileChange = (event) => {
       const file = event.target.files[0];
       setSelectedFile(file);
       setFormData({ ...formData }); 
     }
-
+    
     const handleSubmit = (event) => {
       event.preventDefault();
       const form = event.currentTarget;
@@ -88,8 +91,13 @@ function Main() {
       const data = new FormData();
       data.append("name", formData.name);
       data.append("text", formData.text);
+
       if (selectedFile) {
         data.append("image", selectedFile);
+        data.append("gender", "");
+      } else {
+        data.append("image", "");
+        data.append("gender", gender.kindOfStand);
       }
       setAddShow(false)
       axios.post('feedback/addfeedback/', data, {
@@ -105,14 +113,23 @@ function Main() {
         localStorage.removeItem('token');
         console.log(error)
       })
-      handleChangeIndex(feedbacks.length)
     }
 
     const handleInputChange = (event) => {
       const { name, value } = event.target;
       setFormData({ ...formData, [name]: value });
     };
+    const { kindOfStand } = gender;
 
+  const handleChangeRadio = e => {
+    e.persist();
+    console.log(e.target.value,"gender");
+
+    setGender(prevState => ({
+      ...prevState,
+      kindOfStand: e.target.value
+    }));
+  };
     return (
       <Modal
         {...props}
@@ -132,7 +149,7 @@ function Main() {
           <Form onSubmit={handleSubmit}>
             <Row className="mb-3">
               <Form.Group as={Col} md="12" controlId="validationCustom01">
-                <Form.Label>Name</Form.Label>
+                <Form.Label>Your Good Name...</Form.Label>
                 <Form.Control
                   required
                   type="text"
@@ -144,8 +161,8 @@ function Main() {
                 />
                 <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
               </Form.Group>
-              <Form.Group as={Col} md="12" controlId="validationCustom02">
-                <Form.Label>Feedback</Form.Label>
+              <Form.Group as={Col} md="12" controlId="validationCustom02" style={{marginBottom:"20px"}}>
+                <Form.Label>Feedback...</Form.Label>
                 <Form.Control
                   required
                   type="text"
@@ -157,22 +174,61 @@ function Main() {
                 />
                 <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
               </Form.Group>
-
-              <Form.Group as={Col} md="12" controlId="validationCustom02">
-                <Form.Label>Upload Image</Form.Label>
+              <Form.Group style={{marginTop:"10px",marginBottom:"10px",position:"relative"}}  as={Col} md="12" controlId="validationCustom03">
+              <div style={{borderStyle:checked ? "none" : "groove",borderRadius:"10px"}}>
+              <div className="form-switch">
+              <input style={{width:"60px",height:"30px",position:"absolute",right:"20px",top:"-20px"}} 
+              type="checkbox" 
+              id="custom-switch" 
+              class="form-check-input"
+              onClick={()=>setChecked(!checked)}
+              checked={checked}
+              />
+              </div>
+              <p style={{position:"absolute",right:"85px",top:checked ? "-15px":"-23px"}}>{checked ? "Switch off this to upload your photo" : "Switch on this to avoid photo upload"}</p>
+              <div style={{display:checked ? "none" : "contents"}}>
+                <Form.Label>Please Upload Your Photo...</Form.Label>
                 <Form.Control
-                  required
                   type="file"
                   name="image"
+                  accept="image/*"
                   autoComplete="image"
                   onChange={handleFileChange}
                   placeholder="image"
                 />
                 <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                </div>
+                </div>
               </Form.Group>
+              {
+                checked ? 
+              <Form.Group style={{marginTop:"10px",marginBottom:"10px",position:"relative"}}  as={Col} md="12" controlId="validationCustom05">
+              <div style={{borderStyle:"groove",borderRadius:"10px"}}>
+              <Form.Label>Please select Your gender...</Form.Label>
+              <Form.Check
+              value="Male"
+              type="radio"
+              aria-label="radio 1"
+              label="Male"
+              onChange={handleChangeRadio}
+              checked={kindOfStand === "Male"}
+            />
+            <Form.Check
+              value="Female"
+              type="radio"
+              aria-label="radio 2"
+              label="Female"
+              onChange={handleChangeRadio}
+              checked={kindOfStand === "Female"}
+            />
+                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                </div>
+              </Form.Group>
+               : ""
+              }
             </Row>
             
-            <Button type="submit" style={{ float: "right",marginLeft:"5px"}}>
+            <Button disabled={formData.name && formData.text && (selectedFile || gender) ? false : true} type="submit" style={{ float: "right",marginLeft:"5px"}}>
               Submit
             </Button>
             <Button type="button" onClick={() => setAddShow(false)} style={{ float: "right" }}>
@@ -198,7 +254,7 @@ function Main() {
         </div>
       </div>
       <br/>
-      <div className='container' style={{alignItems:"center"}}>
+      <div className='container-fluid' style={{alignItems:"center"}}>
        <div  className="row justify-content-center align-items-center">
         <div className='col d-flex justify-content-center flex-column align-items-center'>
         <img className='skillsimages' src={react} alt="react"/>
@@ -237,12 +293,14 @@ function Main() {
       <br/>
       <div className='container-fluid' style={{backgroundColor:"#1d262d",marginTop:"10px",marginBottom:"10px"}}>
         <h4 style={{color:"white"}}>Feedbacks</h4>
-        <img className='plusimage hover-effect' src={plus} alt="plus" style={{ cursor: "pointer", width: "4%", height: "4%", float: "right", marginTop: "-30px",backgroundColor:"white",borderRadius:"10px" }} onClick={() => setAddShow(true)} />
+        <img className='plusimage hover-effect' src={plus} alt="plus" style={{position:"relative", cursor: "pointer", width: "4%", height: "4%", float: "right", marginTop: "-30px",backgroundColor:"white",borderRadius:"10px" }} onClick={() => setAddShow(true)} />
+        <h6 style={{color:"white",position:"absolute",right:"65px",marginTop:"-22px"}}>Add Feedback <FontAwesomeIcon icon={faArrowRight} /></h6>
         <AddProjectModal
+
             show={addShow}
             onHide={() => setAddShow(false)}
           />
-      <Carousel ref={carouselRef} breakPoints={breakPoints}>
+      <Carousel breakPoints={breakPoints}>
       {
         feedbacks.map((feedback, id) => {
           return (
@@ -256,7 +314,7 @@ function Main() {
             <img
               key={id}
               className='feedbackcarousel feedbackimages'
-              src={feedback.image}
+              src={feedback.image === null ? (feedback.gender === "Male" ? man : girl) : feedback.image}
               style={{position:"relative",marginRight:"-5px",marginLeft:"-5px",borderRadius:"20px"}}
               alt="feed"
             />

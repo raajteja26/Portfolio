@@ -8,6 +8,9 @@
   height: 30px;
   filter: drop-shadow(2px 4px 6px black) ;
 }
+.roletext {
+  filter: drop-shadow(1px 2px 0px #be1a22) ;
+}
 @media (max-width: 767px) {
   .social{
     display: none;

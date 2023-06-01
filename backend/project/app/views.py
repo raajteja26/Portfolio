@@ -67,6 +67,7 @@ class FeedbackViewSet(viewsets.ReadOnlyModelViewSet):
                 'name': self.request.data["name"],
                 'text': self.request.data["text"],
                 'image': self.request.data["image"],
+                'gender': self.request.data["gender"],
                 # Add more fields as needed
             }
             
