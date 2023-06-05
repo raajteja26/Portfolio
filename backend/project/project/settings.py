@@ -38,8 +38,8 @@ try:
     ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
     CSRF_TRUSTED_ORIGINS = os.environ.get("CSRF_TRUSTED_ORIGINS").split(" ")
 except:
-    ALLOWED_HOSTS = ['127.0.0.1', '0.0.0.0', 'localhost']
-    CSRF_TRUSTED_ORIGINS = ['https://127.0.0.1']
+    ALLOWED_HOSTS = ['127.0.0.1', '0.0.0.0', 'localhost','52bd-36-255-86-179.ngrok-free.app']
+    CSRF_TRUSTED_ORIGINS = ['https://127.0.0.1','https://52bd-36-255-86-179.ngrok-free.app']
 
 
 # Application definition
@@ -144,7 +144,8 @@ AUTHENTICATION_BACKENDS = (
 
 
 
-CORS_ORIGIN_WHITELIST = os.environ.get("CORS_ORIGIN_WHITELIST", 'http://127.0.0.1:3000 http://localhost:3000').split(" ")
+CORS_ORIGIN_WHITELIST = os.environ.get("CORS_ORIGIN_WHITELIST", 'http://127.0.0.1:3000 http://localhost:3000 https://52bd-36-255-86-179.ngrok-free.app').split(" ")
+
 
 
 

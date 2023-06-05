@@ -11,8 +11,21 @@
 .roletext {
   filter: drop-shadow(1px 2px 0px #be1a22) ;
 }
-@media (max-width: 767px) {
-  .social{
-    display: none;
+
+@media (max-width: 576px) {
+  .feedbackcarousel {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+  }
+
+  .feedbackcarousel .feedbackimages {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+  }
+  .card-title {
+    float: none;
+    margin-bottom: 10px;
   }
 }

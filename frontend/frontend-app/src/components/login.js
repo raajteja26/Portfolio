@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import { Container, Form, Button } from 'react-bootstrap';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import axios from 'axios';
+import teja from "./images/teja.ico";
 
 function LoginPage({ name, ...props }) {
   const [show, setShow] = useState(false);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [token, setToken] = useState('');
   const [redText, setRedText] = useState(false);
   const [colour, setColour] = useState("black");
   const [loginButton, setLoginButton] = useState('Login');
@@ -44,9 +44,7 @@ function LoginPage({ name, ...props }) {
   };
   return (
     <>
-      <h6 style={{cursor:"pointer"}} onClick={handleShow} className="me-2">
-        {name}
-      </h6>
+    <img style={{cursor:"pointer",marginRight:"-20px",marginTop:"-10px"}} onClick={handleShow} className='tejaimage' src={teja} alt="teja"/>
       <Offcanvas show={show} onHide={handleClose} {...props}>
         <Offcanvas.Header closeButton>
           <Offcanvas.Title>Please Login...</Offcanvas.Title>

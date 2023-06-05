@@ -16,13 +16,13 @@ function Footer() {
           <div className='col-md-6 col-sm-12'>
             <div className='row'>
               <div className='col-12'><h6 style={{ float: "left",marginBottom:"15px" }}>CONTACT ME -</h6></div>
-              <div className='col-12'><FontAwesomeIcon style={{ float: "left", marginTop: "3px" }} icon={faLocationDot} /><p style={{ float: "left" }}><span style={{marginLeft:"5px"}}> Venkateshwarlapally, Kamalapur, Warangal, 506391</span></p></div>
+              <div className='col-12'><FontAwesomeIcon style={{ float: "left", marginTop: "3px" }} icon={faLocationDot} /><p style={{ float: "left" }}><span style={{marginLeft:"5px"}}> Venkateshwarlapally,Warangal,506391</span></p></div>
               <div className='col-12'><FontAwesomeIcon style={{ float: "left", marginTop: "3px" }} icon={faPhone} /><p style={{ float: "left" }}><span style={{marginLeft:"5px"}}>9515371838</span></p></div>
               <div className='col-12'><FontAwesomeIcon style={{ float: "left", marginTop: "3px" }} icon={faEnvelope} /><p style={{ float: "left" }}><span style={{marginLeft:"5px"}}>rajupaka0811@gmail.com</span></p></div>
             </div>
           </div>
-          <div className='col-md-6 col-sm-12'>
-            <div className='row' style={{ justifyContent: "center", marginInline: "7rem" }}>
+          <div className='col-md-6 col-sm-12 networks'>
+            <div className='row'>
               <h6 className="social" style={{marginBottom:"15px"}}>SOCIAL NETWORKS -</h6>
               <div className='col'>
               <img className='socialimages hover-effect' src={linkedin} alt="linkedin" style={{ cursor: "pointer" }} onClick={() => {

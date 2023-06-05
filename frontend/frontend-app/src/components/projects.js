@@ -23,10 +23,10 @@ function Projects() {
 
 
   const breakPoints = [
-    { width: 1, itemsToShow: 1},
-    { width: 550, itemsToShow: 1 },
-    { width: 768, itemsToShow: 3 },
-    { width: 1200, itemsToShow: 3 },
+    { width: 1, itemsToShow: 1 }, // Mobile devices
+    { width: 550, itemsToShow: 2 }, // Tablets
+    { width: 768, itemsToShow: 3 }, // Small laptops
+    { width: 1200, itemsToShow: 4 }, // Desktops
   ];
 
   React.useEffect(() => {
@@ -50,26 +50,36 @@ function Projects() {
 
   function ResponsibilitiesModal(props) {
     return (
-      <Modal
-        {...props}
-        size="lg"
-        aria-labelledby="contained-modal-title-vcenter"
-        centered
-      >
-        <Modal.Header style={{ backgroundColor: "#1d262d", color: "white" }} className="custom-close-button" closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">
-            Roles and Responsibilities in - {projectName} Project:
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          {responsibilities.map((line, index) => (
-            <p key={index}><FontAwesomeIcon icon={faArrowRight} /> {line}</p>
-          ))}
-        </Modal.Body>
-        <Button type="button" onClick={() => setModalShow(false)} style={{ float: "right" }}>
-              Close
-        </Button>
-      </Modal>
+      <>
+  <Modal
+    {...props}
+    size="lg"
+    aria-labelledby="contained-modal-title-vcenter"
+    centered
+  >
+    <Modal.Header
+      style={{ backgroundColor: "#1d262d", color: "white" }}
+      className="custom-close-button"
+      closeButton
+    >
+      <Modal.Title id="contained-modal-title-vcenter" style={{ fontSize: "17px" }}>
+        Roles and Responsibilities in - <span className="roletext">{projectName}</span> Project:
+      </Modal.Title>
+    </Modal.Header>
+    <Modal.Body style={{ maxHeight: "60vh", overflowY: "auto" }}>
+      {responsibilities.map((line, index) => (
+        <p key={index}>
+          <FontAwesomeIcon icon={faArrowRight} /> {line}
+        </p>
+      ))}
+    </Modal.Body>
+    <Modal.Footer>
+      <Button type="button" onClick={() => setModalShow(false)}>
+        Close
+      </Button>
+    </Modal.Footer>
+  </Modal>
+</>
     );
   }
   
@@ -317,31 +327,67 @@ function Projects() {
         <div style={{position:"absolute",top:"0px",right:"20px"}}>
           {localStorage.getItem('token') ? <img className='plusimage hover-effect' src={plus} alt="plus" style={{cursor: "pointer", width: "10%", height: "10%", float: "right", marginTop: "5%" }} onClick={() => setAddShow(true)} /> : ""}
           </div>
-        <div className="row">
+          <div className="row">
           {projects.map((project, id) => (
-            <div className="col-sm-12" key={id}>
-              <div className="card" style={{ marginTop: "2%"}}>
-                <div className="card-body" style={{ backgroundColor: "#1d262d", color: "white", borderRadius: "5px" }}>
-                  <h6 className="card-title" style={{ fontWeight: "600", float: "right" }}>Project - <span className='roletext'>{project.name}</span></h6>
-                  <p className="card-title" style={{ fontWeight: "600" }}>Role - <span className='roletext'>{project.role}</span></p>
-                  <div className='container-fluid' style={{ borderRadius: "5px", backgroundColor: "white", color: "#1d262d" }}>
-                    <p className="card-title" style={{ fontWeight: "700" }}>Technologies:</p>
-                    <p className="card-text" style={{fontWeight:"600"}}>{project.technologies}</p>
+            <div className="col-md-6 col-sm-12" key={id}>
+              <div className="card" style={{ marginTop: "2%" }}>
+                <div
+                  className="card-body"
+                  style={{
+                    backgroundColor: "#1d262d",
+                    color: "white",
+                    borderRadius: "5px",
+                  }}
+                >
+                <div>
+                  <h6
+                    className="card-title"
+                    style={{ fontWeight: "500"}}
+                  >
+                    Project - <span className="roletext">{project.name}</span>
+                  </h6>
+                  <p className="card-title" style={{ fontWeight: "500"}}>
+                    Role - <span className="roletext">{project.role}</span>
+                  </p>
                   </div>
-                  <p style={{ float: "right", cursor: "pointer"}} onClick={() => onClickMore(project.responsibilities, project.name)}><button class="btn btn-outline-primary" style={{fontWeight:"400", borderRadius:"5px",marginTop:"4px"}}><FontAwesomeIcon icon={faArrowRight} /> click to see Responsibilities...</button></p>
-                  <ResponsibilitiesModal
-                    show={modalShow}
-                    onHide={() => setModalShow(false)}
-                  />
+                  <div
+                    className="container-fluid"
+                    style={{
+                      borderRadius: "5px",
+                      backgroundColor: "white",
+                      color: "#1d262d",
+                    }}
+                  >
+                    <p className="card-title" style={{ fontWeight: "600" }}>
+                      Technologies:
+                    </p>
+                    <p className="card-text" style={{ fontWeight: "400" }}>
+                      {project.technologies}
+                    </p>
+                  </div>
+                  <p
+                    style={{ float: "right", cursor: "pointer" }}
+                    onClick={() => onClickMore(project.responsibilities, project.name)}
+                  >
+                    <button
+                      className="btn btn-outline-primary"
+                      style={{
+                        fontWeight: "400",
+                        borderRadius: "5px",
+                        marginTop: "4px",
+                      }}
+                    >
+                      <FontAwesomeIcon icon={faArrowRight} /> click to see Responsibilities...
+                    </button>
+                  </p>
+                  <ResponsibilitiesModal show={modalShow} onHide={() => setModalShow(false)} />
                 </div>
               </div>
             </div>
           ))}
-          <AddProjectModal
-            show={addShow}
-            onHide={() => setAddShow(false)}
-          />
+          <AddProjectModal show={addShow} onHide={() => setAddShow(false)} />
         </div>
+        
 
       </div>
       <br />
@@ -353,24 +399,22 @@ function Projects() {
             onHide={() => setAddShow1(false)}
           />
       <Carousel breakPoints={breakPoints}>
-      {
-        certificates.map((certificate, id) => {
-          return (
-            <>
-            <div className='feedbackcarousel'>
-            <img
-              key={id}
-              className='feedbackcarousel feedbackimages'
-              src={certificate.image}
-              style={{position:"relative",marginRight:"-5px",marginLeft:"-5px",borderRadius:"10px"}}
-              alt="certificate"
-            />
-            </div>
-            </>
-          );
-        })
-      }
-        </Carousel>
+      {certificates.map((certificate, id) => (
+        <div className='feedbackcarousel' key={id}>
+          <img
+            className='feedbackcarousel feedbackimages'
+            src={certificate.image}
+            style={{
+              position: 'relative',
+              marginRight: '-5px',
+              marginLeft: '-5px',
+              borderRadius: '10px',
+            }}
+            alt="certificate"
+          />
+        </div>
+      ))}
+    </Carousel>
       </div>
     <br/>
       <div >

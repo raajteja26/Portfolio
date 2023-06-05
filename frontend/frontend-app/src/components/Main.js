@@ -1,4 +1,4 @@
-import React, { useState,useRef } from 'react';
+import React, { useState } from 'react';
 import "./Main.css"
 import css from "./images/css.png";
 import django from "./images/django.jpeg";
@@ -18,13 +18,13 @@ import axios from 'axios';
 import Modal from 'react-bootstrap/Modal';
 import plus from "./images/plus.png";
 import Button from 'react-bootstrap/Button';
-import Tooltip from 'react-bootstrap/Tooltip';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import Popover from 'react-bootstrap/Popover';
 
 function Main() {
   const [feedbacks, setFeedbacks] = React.useState([])
@@ -59,12 +59,12 @@ function Main() {
       }
     };
 
-  const breakPoints = [
-    { width: 1, itemsToShow: 2 },
-    { width: 550, itemsToShow: 3 },
-    { width: 768, itemsToShow: 4 },
-    { width: 1200, itemsToShow: 6 },
-  ];
+    const breakPoints = [
+      { width: 1, itemsToShow: 1 }, // Mobile devices
+      { width: 550, itemsToShow: 2 }, // Tablets
+      { width: 768, itemsToShow: 5 }, // Small laptops
+      { width: 1200, itemsToShow: 5 }, // Desktops
+    ];
   
   function AddProjectModal(props) {
     const [selectedFile, setSelectedFile] = useState(null);
@@ -185,7 +185,7 @@ function Main() {
               checked={checked}
               />
               </div>
-              <p style={{position:"absolute",right:"85px",top:checked ? "-15px":"-23px"}}>{checked ? "Switch off this to upload your photo" : "Switch on this to avoid photo upload"}</p>
+              <p style={{position:"absolute",right:"85px",top:checked ? "-15px":"-23px"}}>{checked ? "Switch off this to upload photo" : "Switch on this to avoid photo"}</p>
               <div style={{display:checked ? "none" : "contents"}}>
                 <Form.Label>Please Upload Your Photo...</Form.Label>
                 <Form.Control
@@ -245,7 +245,7 @@ function Main() {
       <div className='container pickupline'>
         <div className='row ' style={{ alignItems: "center" }}>
           <div className='col-md-7'>
-            <p style={{ color: "white", fontSize: "20px" }}>Experienced Full Stack Engineer proficient in React and Django, with expertise in Docker and Kubernetes. Skilled in frontend and backend development, RESTful API design, and version control. Strong problem-solving abilities and a focus on delivering high-quality software solutions.</p>
+            <p className='summary'>Experienced Full Stack Engineer proficient in React and Django, with expertise in Docker and Kubernetes. Skilled in frontend and backend development, RESTful API design, and version control. Strong problem-solving abilities and a focus on delivering high-quality software solutions.</p>
           </div>
           <div className='col-md-5 raajphoto position-relative'>
             <img className='raajteja1' src={raajteja1} alt="raajteja1" />
@@ -258,73 +258,83 @@ function Main() {
        <div  className="row justify-content-center align-items-center">
         <div className='col d-flex justify-content-center flex-column align-items-center'>
         <img className='skillsimages' src={react} alt="react"/>
-          <h5 >React</h5>
+          <h5 className='skillstext'>React</h5>
         </div>
         <div className='col d-flex justify-content-center flex-column align-items-center'>
         <img className='skillsimages' src={django} alt="django"/>
-          <h5 >Django</h5>
+          <h5 className='skillstext' >Django</h5>
         </div>
         <div className='col d-flex justify-content-center flex-column align-items-center'>
         <img className='skillsimages' src={python} alt="python"/>
-          <h5 >Python</h5>
+          <h5 className='skillstext' >Python</h5>
         </div>
         <div className='col d-flex justify-content-center flex-column align-items-center'>
         <img className='skillsimages' src={docker} alt="docker"/>
-          <h5 >Docker</h5>
+          <h5 className='skillstext'>Docker</h5>
         </div>
         <div className='col d-flex justify-content-center flex-column align-items-center'>
         <img className='skillsimages' src={html} alt="html"/>
-          <h5 >HTML</h5>
+          <h5 className='skillstext'>HTML</h5>
         </div>
         <div className='col d-flex justify-content-center flex-column align-items-center'>
           <img className='skillsimages' src={css} alt="css"/>
-          <h5 >CSS</h5>
+          <h5 className='skillstext'>CSS</h5>
         </div>
         <div className='col d-flex justify-content-center flex-column align-items-center'>
           <img className='skillsimages' src={git} alt="git"/>
-          <h5 >Git</h5>
+          <h5 className='skillstext'>Git</h5>
         </div>
         <div className='col d-flex justify-content-center flex-column align-items-center'>
           <img className='skillsimages' src={postgress} alt="postgress"/>
-          <h5>PostgreSQL</h5>
+          <h5 className='skillstext'>PostgreSQL</h5>
         </div>
        </div>
       </div>
       <br/>
       <div className='container-fluid' style={{backgroundColor:"#1d262d",marginTop:"10px",marginBottom:"10px"}}>
-        <h4 style={{color:"white"}}>Feedbacks</h4>
-        <img className='plusimage hover-effect' src={plus} alt="plus" style={{position:"relative", cursor: "pointer", width: "4%", height: "4%", float: "right", marginTop: "-30px",backgroundColor:"white",borderRadius:"10px" }} onClick={() => setAddShow(true)} />
-        <h6 style={{color:"white",position:"absolute",right:"65px",marginTop:"-22px"}}>Add Feedback <FontAwesomeIcon icon={faArrowRight} /></h6>
-        <AddProjectModal
+        <h6 className='mobilefeedback' style={{color:"white"}}>click on image to see</h6>
+        <h4 style={{color:"white"}}>Feedback</h4>
+        <img
+          className="plusimage plussize hover-effect"
+          src={plus}
+          alt="plus"
+          onClick={() => setAddShow(true)}
+        />
 
+        <h6 style={{color:"white",position:"absolute",right:"45px",marginTop:"-25px"}}>Add Feedback <FontAwesomeIcon icon={faArrowRight} /></h6>
+        <AddProjectModal
             show={addShow}
             onHide={() => setAddShow(false)}
           />
-      <Carousel breakPoints={breakPoints}>
-      {
-        feedbacks.map((feedback, id) => {
-          return (
+          <Carousel breakPoints={breakPoints}>
+          {feedbacks.map((feedback, id) => (
             <>
             <OverlayTrigger
             placement="bottom"
-            overlay={<Tooltip id="button-tooltip-2 feedbacktext"><h6 >{feedback.text}</h6></Tooltip>}
-          >
-            <div className='feedbackcarousel textfeedback'>
-  
-            <img
-              key={id}
-              className='feedbackcarousel feedbackimages'
-              src={feedback.image === null ? (feedback.gender === "Male" ? man : girl) : feedback.image}
-              style={{position:"relative",marginRight:"-5px",marginLeft:"-5px",borderRadius:"20px"}}
-              alt="feed"
-            />
-            <h5 key={id} className='feedbacktext' style={{position:"absolute",color:"white",bottom:"0px",fontWeight:"700"}}>{feedback.name}</h5>
-            </div>
-            </OverlayTrigger>
+            overlay={
+              <Popover id="popover-basic">
+                <Popover.Header as="h4">{feedback.name} - Feedback</Popover.Header>
+                <Popover.Body>
+                  {feedback.text}
+                </Popover.Body>
+              </Popover>
+            }
+            >
+                <div className="feedbackcarousel textfeedback">
+                  <img
+                    key={id}
+                    className="feedbackcarousel"
+                    src={feedback.image === null ? (feedback.gender === "Male" ? man : girl) : feedback.image}
+                    style={{objectFit: "cover"}}
+                    alt="feed"
+                  />
+                  <h5 className="feedbacktext" style={{ position: "absolute", color: "white", bottom: "0px", fontWeight: "700" }}>
+                    {feedback.name}
+                  </h5>
+                </div>
+              </OverlayTrigger>
             </>
-          );
-        })
-      }
+          ))}
         </Carousel>
       </div>
       <div className='bottom-component'>
