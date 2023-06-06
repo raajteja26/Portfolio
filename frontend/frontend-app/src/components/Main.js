@@ -25,6 +25,7 @@ import Row from 'react-bootstrap/Row';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import Popover from 'react-bootstrap/Popover';
+import Swal from 'sweetalert2';
 
 function Main() {
   const [feedbacks, setFeedbacks] = React.useState([])
@@ -106,6 +107,16 @@ function Main() {
         }
       }).then(
         response => {
+          if(response.status === 200){    
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title:`Thank you ${formData.name}`,
+            text: 'Your Feedback has been saved',
+            showConfirmButton: false,
+            timer: 2000
+          })
+          }
           console.log(response)
           fetchFeedbacks();
         }
@@ -123,7 +134,6 @@ function Main() {
 
   const handleChangeRadio = e => {
     e.persist();
-    console.log(e.target.value,"gender");
 
     setGender(prevState => ({
       ...prevState,
@@ -202,8 +212,7 @@ function Main() {
               </Form.Group>
               {
                 checked ? 
-              <Form.Group style={{marginTop:"10px",marginBottom:"10px",position:"relative"}}  as={Col} md="12" controlId="validationCustom05">
-              <div style={{borderStyle:"groove",borderRadius:"10px"}}>
+              <Form.Group style={{borderStyle:"groove",borderRadius:"5px",marginTop:"10px",marginBottom:"10px",position:"relative"}}  as={Col} md="12" controlId="validationCustom05">
               <Form.Label>Please select Your gender...</Form.Label>
               <Form.Check
               value="Male"
@@ -221,8 +230,8 @@ function Main() {
               onChange={handleChangeRadio}
               checked={kindOfStand === "Female"}
             />
-                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-                </div>
+              <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+             
               </Form.Group>
                : ""
               }

@@ -72,9 +72,13 @@ function LoginPage({ name, ...props }) {
                 {redText ? <Form.Label style={{color:colour}}>Invalid please try again...</Form.Label> : ""}
                 <br/>
                 </Form.Group>
-                <Button disabled={username && password ? false : true} variant="primary" type="submit">
+                <Button variant="primary" onClick={()=>setShow(false)}>
+                  Cancel
+                </Button>
+                <Button style={{marginLeft:"10px"}} disabled={username && password ? false : true} variant="primary" type="submit">
                 {loginButton}
                 </Button>
+                
             </Form>
         </Container>
         </Offcanvas.Body>
