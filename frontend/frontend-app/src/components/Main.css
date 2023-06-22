@@ -110,7 +110,7 @@ small {
   }
   .summary {
     color: white;
-    font-size: 18px;
+    font-size: 17px;
   }
   .mobilefeedback{
     display: contents;
@@ -137,7 +137,7 @@ small {
   }
   .summary {
     color: white;
-    font-size: 19px;
+    font-size: 17px;
   }
 }
 @media (min-width: 768px) {
